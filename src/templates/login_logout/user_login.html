@@ -1,0 +1,24 @@
+<h1> user_login <h1>
+    {% comment %} {% extends 'myapp/base.html' %} {% endcomment %}
+
+{% block body_block %}
+
+<div class="jumbotron">
+  <h1>Please Login </h1>
+
+  <form action="{% url 'user-login-URL' %}" method="POST">
+
+    {% csrf_token %}
+
+    <label for="username">Username:</label>
+    <input type="text" name="username" placeholder="Enter username">
+
+    <label for="password">Password:</label>
+    <input type="password" name="password">
+
+    <button type="submit" class="btn btn-primary">Login</button>
+
+  </form>
+
+</div>
+{% endblock %} 
