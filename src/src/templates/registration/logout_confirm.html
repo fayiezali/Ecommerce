@@ -1,0 +1,48 @@
+
+{% comment %} {% extends "home/base.html" %}   {% endcomment %}
+{% load static %}
+
+
+
+
+
+
+{% block Page_Title  %}
+
+<div class="row justify-content-center">
+<h1>Logout Confirm - تأكيد تسجيل الخروج</h1>
+</div>
+
+{% endblock Page_Title %}  
+
+
+
+
+
+
+{% block Contents_Page %} 
+
+<div class="row justify-content-center">
+    <div class="col-5">
+    <div class="card">
+    <div class="card-body">
+    
+<h4> Confirmation </h4>
+<h4> تأكيد.</h4>
+
+    
+<p>Are You Sure You Want To Logout  </p>
+<p> هل أنت متأكد أنك تريد تسجيل الخروج  </p>
+
+
+<a href="{% url 'logout-URL'%}" role="button" style="float:lieft" class="btn btn-success">( Yes - نعم) </a><!-- Exit From Home Page  -->
+<a href="{% url 'dashboard-URL'%}" role="button" style="float:lieft" class="btn btn-primary">( No - لا) </a><!-- Go To Home Page  -->
+
+
+
+</div>
+</div>
+</div>
+</div>
+
+{% endblock Contents_Page %} 
