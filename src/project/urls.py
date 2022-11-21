@@ -19,12 +19,14 @@ from django.urls import path ,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     #
+    #
     # App1 dashboard
     path('', include('dashboard.urls')),
     #
     # App2 login_logout
-    path('', include('login_logout.urls')),
+    path('', include('registration.urls')),
     #
     # App2 .........
-    
+    path('', include('login_logout.urls')),
+    # path("accounts/", include("django.contrib.auth.urls")),  # new
 ]

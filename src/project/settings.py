@@ -37,9 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'dashboard',
+    'registration',
     'login_logout',
-    # '',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+
+LOGIN_REDIRECT_URL = 'dashboard-URL' # Go To Home Page HTML
+LOGOUT_REDIRECT_URL = 'LogoutDone-URL' # Go To LogoutDone.html Page HTML
+LOGIN_ERROR_URL = 'login-URL'
+
