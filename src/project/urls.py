@@ -19,14 +19,20 @@ from django.urls import path ,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     #
-    #
-    # App1 dashboard
+        # App1 .........
     path('', include('dashboard.urls')),
-    #
-    # App2 login_logout
-    path('', include('registration.urls')),
     #
     # App2 .........
     path('', include('login_logout.urls')),
+    #
+    # App3 dashboard
+    path('', include('password_change.urls')),
+    #
+    # App4 login_logout
+    # path('', include('password_reset.urls')),
+    #
+    # App5 login_logout
+    # path('', include('register.urls')),
+    #
     # path("accounts/", include("django.contrib.auth.urls")),  # new
 ]
