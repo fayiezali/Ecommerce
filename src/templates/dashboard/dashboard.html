@@ -50,8 +50,8 @@
                     <li>
                     <span class="opener">(A) -My Acoount - حسابي</span>
                     <ul>
-                        <li><a href="#">1- Password Reset - إعادة تعيين كلمة المرور</a></li>
-                        <li><a href="{% url 'password_change-URL'     %}">2- Password Change - تغيير كلمة المرور</a></li>
+                        <li><a href="{% url 'password_reset'        %}">1- Password Reset - إعادة تعيين كلمة المرور</a></li>
+                        <li><a href="{% url 'password_change'  %}">2- Password Change - تغيير كلمة المرور</a></li>
                         <li><a href="#"                                >3- Delete Profile - حذف الحساب</a></li>    
                     </ul>
                     </li>
@@ -65,11 +65,12 @@
                     </ul>
                     </li>
     {% else %}
-    <li><a href="{% url 'admin:login'     %}">1- Administrator Login </a></li>
-    <li><a href="{% url 'login-URL'  %}">2- Customer      Login </a></li>
-    <li><a href="#">3- Sign Up                                       </a></li>
-    <li><a href="{% url 'dashboard-URL'   %}">4- Home Page           </a></li>
-    <li><a href="{% url 'about-URL'       %}">5- About Us            </a></li>
+    <li><a href="{% url 'admin:login'      %}">1- Administrator Login </a></li>
+    <li><a href="{% url 'login'            %}">2- Customer    Login </a></li>
+    {% comment %} <li><a href="#">2- Customer    Login- Funchan </a></li> {% endcomment %}
+    <li><a href="{% url 'signup-URL'       %}">3- Sign Up             </a></li>
+    <li><a href="{% url 'dashboard-URL'    %}">4- Home Page           </a></li>
+    <li><a href="{% url 'about-URL'        %}">5- About Us            </a></li>
                 </ul>
                 </nav>
                 {% endif %}

@@ -19,6 +19,22 @@
 
 
 
+{% block messages_Contents  %}
+
+<!-- ظهور رسالة للمستخدم -->
+{% if messages %} <!-- جملة شرطية للتحقق من وجود رسالة قبل عرضها-->
+{% for message in messages %} <!-- جملة تكرار للمرور على جميع  محتويات الرسالة لعرضها كلها -->
+        <!--success: هي التي تقوم بتحديد لون الرسالة اخضر -->
+        <!--warning: هي التي تقوم بتحديد لون الرسالة احمر -->
+        <div  class="alert alert-success">
+                {{ message }} <!-- المتغير الذي يحمل نص الرسالة-->
+        </div>
+{% endfor %}
+{% endif %}
+
+{% endblock messages_Contents %}  
+
+
 
 
 
@@ -43,7 +59,7 @@
 </div>
 </div>
 <p  class="mt-4"> Have You Lost The Password- -هل نسيت كلمة المرور? <a  class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline" href="#" > Forgot Password - نسيت كلمة المرور? </a> </p>
-<p class="mt-1"> Create New Accounts - إنشاء حساب جديد <a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline" href="#" > Signup  - تسجيل</a> </p>
+<p class="mt-1"> Create New Accounts - إنشاء حساب جديد <a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline" href="{% url 'signup-URL'       %}" > Signup  - تسجيل</a> </p>
 </div>
 </div>
 

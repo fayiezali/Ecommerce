@@ -14,6 +14,7 @@ def dashboard(request):
 # # The Condition For Seeing The Required Page Login
 # @login_required(login_url="login/")
 # View the about Page
+@login_required(login_url='login/')
 def about(request):
     context={}
     return render(request,'dashboard/about.html',context)

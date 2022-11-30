@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'dashboard',
     'login_logout',
     'password_change',
-    # 'password_reset',
-    # 'register',
+    'password_reset',
+    'register',
 ]
 
 MIDDLEWARE = [
@@ -130,25 +130,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
-
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
 LOGIN_REDIRECT_URL = 'dashboard-URL' # Go To Home Page HTML
 LOGOUT_REDIRECT_URL = 'LogoutDone-URL' # Go To LogoutDone.html Page HTML
 LOGIN_ERROR_URL = 'login-URL'
 
 
-# #Call Class Sign  In with Email
+#Call Class Sign  In with Email
 # AUTHENTICATION_BACKENDS = ['accounts.backends.EmailBackend']
 
-# # EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-# EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
+# EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
 
-# # Email Settings
-# from accounts.email_info import EMAIL_BACKEND , EMAIL_HOST , EMAIL_HOST_USER , EMAIL_HOST_PASSWORD , EMAIL_PORT ,  EMAIL_USE_TLS , PASSWORD_RESET_TIMEOUT_DAYS
-# EMAIL_BACKEND = EMAIL_BACKEND
-# EMAIL_HOST = EMAIL_HOST # mail service smtp
-# EMAIL_HOST_USER = EMAIL_HOST_USER# email id
-# EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD # password
-# EMAIL_PORT = EMAIL_PORT
-# EMAIL_USE_TLS = EMAIL_USE_TLS
-# PASSWORD_RESET_TIMEOUT_DAYS = PASSWORD_RESET_TIMEOUT_DAYS
-# #
+# Email Settings
+from password_reset.email_info import EMAIL_BACKEND , EMAIL_HOST , EMAIL_HOST_USER , EMAIL_HOST_PASSWORD , EMAIL_PORT ,  EMAIL_USE_TLS , PASSWORD_RESET_TIMEOUT_DAYS
+EMAIL_BACKEND = EMAIL_BACKEND
+EMAIL_HOST = EMAIL_HOST # mail service smtp
+EMAIL_HOST_USER = EMAIL_HOST_USER# email id
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD # password
+EMAIL_PORT = EMAIL_PORT
+EMAIL_USE_TLS = EMAIL_USE_TLS
+PASSWORD_RESET_TIMEOUT_DAYS = PASSWORD_RESET_TIMEOUT_DAYS
+#

@@ -1,0 +1,41 @@
+<h1>User-Login</h1>
+{% comment %} {% extends 'myapp/base.html' %} {% endcomment %}
+
+
+
+    
+<!-- ظهور رسالة للمستخدم -->
+{% if messages %} <!-- جملة شرطية للتحقق من وجود رسالة قبل عرضها-->
+    {% for message in messages %} <!-- جملة تكرار للمرور على جميع  محتويات الرسالة لعرضها كلها -->
+<!--success: هي التي تقوم بتحديد لون الرسالة اخضر -->
+<!--warning: هي التي تقوم بتحديد لون الرسالة احمر -->
+        <div  class="alert alert-success">
+           {{ message }} <!-- المتغير الذي يحمل نص الرسالة-->
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+
+
+{% block body_block %}
+
+<div class="jumbotron">
+<h1>Please Login </h1>
+
+<form action="{% url 'user-login-URL' %}" method="POST">
+
+    {% csrf_token %}
+
+    <label for="username">Username:</label>
+    <input type="text" name="username" placeholder="Enter username">
+
+    <label for="password">Password:</label>
+    <input type="password" name="password">
+
+    <button type="submit" class="btn btn-primary">Login</button>
+
+</form>
+
+</div>
+{% endblock %}

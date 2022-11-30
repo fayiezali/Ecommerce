@@ -29,10 +29,10 @@ urlpatterns = [
     path('', include('password_change.urls')),
     #
     # App4 login_logout
-    # path('', include('password_reset.urls')),
+    path('', include('password_reset.urls')),
     #
     # App5 login_logout
-    # path('', include('register.urls')),
+    path('', include('register.urls')),
     #
     # path("accounts/", include("django.contrib.auth.urls")),  # new
 ]
