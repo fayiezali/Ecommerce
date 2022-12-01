@@ -139,7 +139,7 @@ LOGIN_ERROR_URL = 'login-URL'
 #Call Class Sign  In with Email
 # AUTHENTICATION_BACKENDS = ['accounts.backends.EmailBackend']
 
-# EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
 
 # Email Settings
