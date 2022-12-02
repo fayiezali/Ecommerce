@@ -30,7 +30,7 @@ PASSWARD_Criterian = {
                     }
 #
 #
-def signup(request):
+def register_DEF(request):
     if request.method == 'POST':
 
         # take all field entered by user so we cam work with them on backend
@@ -46,33 +46,33 @@ def signup(request):
         # Verify the validity of the inputs - UserName
         if not USERNAME_REGEX.match(username):
             messages.error(request, "User Name - The Entered Data Is incorrect")
-            return redirect('signup-URL')
+            return redirect('register-URL')
 
         # Verify that the name is not used by another user
         if User.objects.filter(username=username):
             messages.error(request, "Username already exist! Please try some other username.")
-            return redirect('signup-URL')
+            return redirect('register-URL')
 
         # Verify the number of input letters
         if len(username)>20:
             messages.error(request, "Username must be under 20 charcters!!")
-            return redirect('signup-URL')
+            return redirect('register-URL')
 
 
         # Verify the validity of the inputs - Email
         if not EMAIL_REGEX.match(email):
             messages.error(request, "EMAIL - The Entered Data Is incorrect")
-            return redirect('signup-URL')
+            return redirect('register-URL')
 
         # Verify that the Email is not used by another user
         if User.objects.filter(email=email).exists():
             messages.error(request, "Email Already Registered!!")
-            return redirect('signup-URL')
+            return redirect('register-URL')
 
         # Check the passwords match
         if password != pass2:
             messages.error(request, "Passwords didn't Matched!!")
-            return redirect('signup-URL')
+            return redirect('register-URL')
 
         print('step(1) - Data Verification has been Completed')
 
@@ -141,9 +141,9 @@ def signup(request):
         print('step(4) - Send email for confiramtion of the account activation  has been completed')
 
         # now redirecting them to signin page
-        return redirect('login')
+        return redirect('login-URL')
 
-    return render(request, "register/signup.html")
+    return render(request, "register/register.html")
 
 
 
@@ -162,8 +162,8 @@ def activate(request,uidb64,token):
         myuser.save()
         login(request,myuser)
         messages.success(request, "Your Account has been activated!!")
-        return redirect('login')
+        return redirect('login-URL')
     else:
         messages.error(request, "Your Account activation failed!!")
-        return redirect('signup')
+        return redirect('register-URL')
 
