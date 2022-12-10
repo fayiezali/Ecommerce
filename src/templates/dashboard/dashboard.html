@@ -51,7 +51,9 @@
                     <span class="opener">(A) -My Acoount - حسابي</span>
                     <ul>
                         <li><a href="{% url 'password_reset'        %}">1- Password Reset - إعادة تعيين كلمة المرور</a></li>
-                        <li><a href="{% url 'password_change'  %}">2- Password Change - تغيير كلمة المرور</a></li>
+                        {% comment %} <li><a href="{% url 'password_change'       %}">2- Password Change - تغيير كلمة المرور</a></li> {% endcomment %}
+                        <li><a href="{% url 'changepassword-URL'  %}">2- Password Change -function- تغيير كلمة المرور</a></li>
+                        
                         <li><a href="#"                                >3- Delete Profile - حذف الحساب</a></li>    
                     </ul>
                     </li>
@@ -65,6 +67,24 @@
                     </ul>
                     </li>
     {% else %}
+
+
+    {% block messages_Contents_02  %}
+    
+    <!-- ظهور رسالة للمستخدم -->
+    {% if messages %} <!-- جملة شرطية للتحقق من وجود رسالة قبل عرضها-->
+        {% for message in messages %} <!-- جملة تكرار للمرور على جميع  محتويات الرسالة لعرضها كلها -->
+    <!--success: هي التي تقوم بتحديد لون الرسالة اخضر -->
+    <!--warning: هي التي تقوم بتحديد لون الرسالة احمر -->
+            <div  class="alert alert-success">
+                {{ message }} <!-- المتغير الذي يحمل نص الرسالة-->
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    {% endblock messages_Contents_02 %} 
+
+
     <li><a href="{% url 'admin:login'      %}">1-  Administrator Login </a></li>
     <li><a href="{% url 'login-URL'        %}">2-  Customer    Login </a></li>
     <li><a href="{% url 'register-URL'      %}">3- Register             </a></li>
@@ -73,3 +93,6 @@
                 </ul>
                 </nav>
                 {% endif %}
+
+
+

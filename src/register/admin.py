@@ -1,8 +1,5 @@
-
 from django.contrib import admin
-from .models import UsersTable
-# from account.models import UsersTable
 
-# Register your models here.
+from .models import UsersTable
 
 admin.site.register(UsersTable)
