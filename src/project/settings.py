@@ -132,7 +132,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
 LOGIN_REDIRECT_URL = 'dashboard-URL' # Go To Home Page HTML
-LOGOUT_REDIRECT_URL = 'LogoutDone-URL' # Go To LogoutDone.html Page HTML
+LOGOUT_REDIRECT_URL = 'logout_done-URL' # Go To LogoutDone.html Page HTML
 LOGIN_ERROR_URL = 'login-URL'
 
 
