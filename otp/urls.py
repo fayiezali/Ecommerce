@@ -18,9 +18,9 @@ urlpatterns = [
 #
 #
 # # OTP :-------------------------------------------------------------------------------------------------------
-urlpatterns += [
-    path('number-random/', views.number_random_DEF, name='number_random-URL')
-]
+# urlpatterns += [
+#     path('number-random/', views.number_random_DEF, name='number_random-URL')
+# ]
 #
 #
 # # OTP :-------------------------------------------------------------------------------------------------------

@@ -9,9 +9,9 @@ import random
 #
 #
 class otp_MODEL(models.Model):
-    otp_user      = models.OneToOneField(User    , on_delete = models.CASCADE)
-    otp_one_time_password       = models.IntegerField(db_index=True , blank=True  , null=True )
-    otp_created_at = models.DateTimeField(auto_now_add=True)
+    otp_user              = models.OneToOneField(User              , on_delete = models.CASCADE)
+    otp_one_time_password  = models.IntegerField(db_index=True        , blank=True  , null=True )
+    otp_created_at         = models.DateTimeField(auto_now_add=True)
     #
     def __str__(self):
         # this will make data labelled using username in table in django admin
