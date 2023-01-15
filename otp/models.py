@@ -8,7 +8,7 @@ import random
 #
 #
 #
-class otp_MODEL(models.Model):
+class otpMODEL(models.Model):
     otp_user              = models.OneToOneField(User              , on_delete = models.CASCADE)
     otp_one_time_password  = models.IntegerField(db_index=True        , blank=True  , null=True )
     otp_created_at         = models.DateTimeField(auto_now_add=True)
@@ -34,8 +34,23 @@ class otp_MODEL(models.Model):
     # post_save:  ""   ""  يتم تنفيذ  حدث اخر بعده  "Save" كلاس فكرته: ان بمجرد تنفيذ عملية الحفظ
     def create_otp(sender, **kwargs):
         if kwargs['created']: #'created' إذا كان هناك بيانات تم إستقبالها اطبع هذه الكلمة
-            otp_MODEL.objects.create(otp_user=kwargs['instance']) #التي أستقبلتها "'instance'"جديد بناء على  معلومات المستخدم "PersonalData_MODEL" قم بإنشاء ملف
+            otpMODEL.objects.create(otp_user=kwargs['instance']) #التي أستقبلتها "'instance'"جديد بناء على  معلومات المستخدم "PersonalData_MODEL" قم بإنشاء ملف
     # "" "user"والمستخدم  "post_save" الربط بين الفانكشن
     post_save.connect(create_otp , sender=User)
     #
 
+
+
+# RegexValidator(regex=r'^\+?1?\d{9,15}$'
+
+#  pattern=”[0-9]{3}-[0-9]{3}-[0-9]{4}”
+
+# Validate Phone Numbers
+
+# <label for="phone">Enter your phone number:</label>
+
+# <input type="tel" id="phone" name="phone"
+#        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+#        required>
+
+# <small>Format: 123-456-7890</small>

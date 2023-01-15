@@ -1,5 +1,6 @@
 from django.contrib import admin
 
-from .models import otp_MODEL
+from .models import otpMODEL
 
-admin.site.register(otp_MODEL)
+admin.site.register(otpMODEL)
+
