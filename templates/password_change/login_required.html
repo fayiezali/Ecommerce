@@ -1,0 +1,33 @@
+{% comment %} {% extends 'base.html' %} {% endcomment %}
+{% block messages_Contents  %}
+    
+<!-- ظهور رسالة للمستخدم -->
+{% if messages %} <!-- جملة شرطية للتحقق من وجود رسالة قبل عرضها-->
+    {% for message in messages %} <!-- جملة تكرار للمرور على جميع  محتويات الرسالة لعرضها كلها -->
+<!--success: هي التي تقوم بتحديد لون الرسالة اخضر -->
+<!--warning: هي التي تقوم بتحديد لون الرسالة احمر -->
+        <div  class="alert alert-success">
+            {{ message }} <!-- المتغير الذي يحمل نص الرسالة-->
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% endblock messages_Contents %} 
+
+
+
+
+{% block title %}404 Page{% endblock title %}
+{% block main %}
+<div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="text-center">
+        <h1 class="display-1 fw-bold">Access Denied!</h1>
+        <p class="fs-3"> <span class="text-danger">Opps!</span>Login Required!</p>
+        <p class="lead">
+            The page you’re looking for required login.
+          </p>
+        <a href="/" class="btn btn-primary">Go Home</a>
+        <a href="/login" class="btn btn-primary">Login</a>
+    </div>
+</div>
+{% endblock main %}

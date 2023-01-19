@@ -1,0 +1,42 @@
+<h1> WhatsApp Service - WhatsApp خدمة </h1>
+{% comment %} {% extends 'myapp/base.html' %} {% endcomment %}
+
+
+
+    
+<!-- ظهور رسالة للمستخدم -->
+{% if messages %} <!-- جملة شرطية للتحقق من وجود رسالة قبل عرضها-->
+    {% for message in messages %} <!-- جملة تكرار للمرور على جميع  محتويات الرسالة لعرضها كلها -->
+<!--success: هي التي تقوم بتحديد لون الرسالة اخضر -->
+<!--warning: هي التي تقوم بتحديد لون الرسالة احمر -->
+        <div  class="alert alert-success">
+        {{ message }} <!-- المتغير الذي يحمل نص الرسالة-->
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+
+
+{% block body_block %}
+
+<div class="jumbotron">
+
+    <form action="{% url 'active_cancel_whatsapp_service-URL' %}" method="POST">
+
+        {% csrf_token %}
+        <label for="mobile_number">Mobile Number:</label>
+        
+        <br>
+        <input type="text" name="mobile_number_for_active_or_cancel">
+        
+        <br>
+        
+        <input type="submit" value="Active / cancel" >
+
+    </form> 
+    <a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline" href="{% url 'dashboard-URL' %}" class="btn btn">Go To Home Page - الذهاب إلى الصفحة الرئيسية</a> <!-- Go To Home Page -->
+
+</div>
+{% endblock %}
+

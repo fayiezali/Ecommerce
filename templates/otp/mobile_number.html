@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Creating the complete HTML and CSS syntax </title>
+<style>
+#Learn {
+font-size: 28px;
+color: orange;
+}
+h1,
+h2 {
+font-family: Arial;
+}
+</style>
+</head>
+<body style=”text-align: center”>
+<h1 style=”color: orange”> A Complete Guide </h1>
+<h2> Adding a phone number input field for users on your web page </h2>
+
+<form action="." method="post" id="payment-form">
+    {% csrf_token %}
+
+    <label for="phone"> Phone: </label>
+    {% if not validated_phone_number %} 
+    <input id="phone" name="phone" value="" class="form-control" autocomplete="off" type="tel" required />
+    {% else %}
+    <div id="phone">{{ validated_phone_number }}
+    {% endif %}
+</form>
+
+
+
+
+
+
+
+<form>
+Name:
+<input type=”text”
+placeholder=”Please enter your name here” />
+<br />
+Your address:
+<input type=”text”
+placeholder=”Please enter your address here” />
+<br />
+Phone Number:
+<input type=”tel”
+placeholder=”Please enter your phone number here” />
+<br />
+<br />
+<button> Submit </button>
+</form>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<h1> dashboard <h1>
+    
+    {% if  user.is_authenticated %}
+
+
+
+
+    
+    {% block messages_Contents  %}
+    
+    <!-- ظهور رسالة للمستخدم -->
+    {% if messages %} <!-- جملة شرطية للتحقق من وجود رسالة قبل عرضها-->
+        {% for message in messages %} <!-- جملة تكرار للمرور على جميع  محتويات الرسالة لعرضها كلها -->
+    <!--success: هي التي تقوم بتحديد لون الرسالة اخضر -->
+    <!--warning: هي التي تقوم بتحديد لون الرسالة احمر -->
+            <div  class="alert alert-success">
+                {{ message }} <!-- المتغير الذي يحمل نص الرسالة-->
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    {% endblock messages_Contents %} 
+
+
+
+
+
+
+
+
+
+
+
+    
+    <p  class="mt-0">  Welcome -مرحبا (  {{ user.username }} ) </p>
+    <p  class="mt-0">  Last login: - أخر دخول (  {{ user.last_login }} ) </p>
+    
+    
+    
+    <li><a href="{% url 'dashboard-URL'    %}">(1) - Home page - الصفحة الرئيسية</a></li>
+    <li><a href="{% url 'about-URL'        %}">(2) - About Us  - معلومات عنا</a></li>
+    <li><a href="{% url 'logout_confirm-URL'  %}">(3) - Logout  - الخروج</a></li>
+    
+    
+    <!--  Base.html - Menu_Page Start- ---------------------------- -->
+                <!-- Menu -->
+                <nav id="menu">
+                    
+                <ul>
+                    <li>
+                    <span class="opener">(A) -My Acoount - حسابي</span>
+                    <ul> 
+                        {% comment %} <li><a href="{% url 'forgot_password-URL'                        %}">4- Forgo Password - نسيت كلمة المرور </a></li> {% endcomment %}
+                        <li><a href="{% url 'changepassword-URL'                        %}">1- Password Change -function- تغيير كلمة المرور</a></li>
+                        <li><a href="{% url 'display_activate_whatsapp_service-URL'          %}">2- -WhatsApp Service - WhatsApp خدمة </a></li>
+                        <li><a href="{% url 'display_generate_random_strong_password-URL'   %}">3- Display Generate Random Strong Password  -      عرض صفحة توليد كلمة المرور </a></li>
+
+                        {% comment %} <li><a href="{% url 'password_change'       %}">2- Password Change - تغيير كلمة المرور</a></li> {% endcomment %}
+
+                        <li><a href="#"                                            >5- Delete Profile - حذف الحساب</a></li>    
+                    </ul>
+                    </li>
+                                    
+                    <li>
+                    <span class="opener">(B) - My Profile - الملف  الشخصي</span>
+                    <ul>
+                        <li><a href="#">1- Non - 01/a></li>
+    
+                        
+                    </ul>
+                    </li>
+    {% else %}
+    
+
+    {% block messages_Contents_02  %}
+    
+    <!-- ظهور رسالة للمستخدم -->
+    {% if messages %} <!-- جملة شرطية للتحقق من وجود رسالة قبل عرضها-->
+        {% for message in messages %} <!-- جملة تكرار للمرور على جميع  محتويات الرسالة لعرضها كلها -->
+    <!--success: هي التي تقوم بتحديد لون الرسالة اخضر -->
+    <!--warning: هي التي تقوم بتحديد لون الرسالة احمر -->
+            <div  class="alert alert-success">
+                {{ message }} <!-- المتغير الذي يحمل نص الرسالة-->
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    {% endblock messages_Contents_02 %} 
+
+
+    <li><a href="{% url 'admin:login'               %}">1-  Administrator Login           </a></li>
+    <li><a href="{% url 'authorization_with_otp-URL'   %}">3-  Customer  Login With OTP </a></li>
+    <li><a href="{% url 'register-URL'               %}">4-  Register                    </a></li>
+    <li><a href="{% url 'dashboard-URL'             %}">5-  Home Page                 </a></li>
+    <li><a href="{% url 'about-URL'                 %}">6-  About Us                   </a></li>
+    
+    
+    
+<p class="mt-1"><a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline" href="{% url 'register-URL'                          %}" class="btn btn"> Register             - تسجيل                </a></p>
+
+<p class="mt-1"><a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline" href="{% url 'display_send_new_password_to_user-URL'   %}" class="btn btn"> Forgot Password      - نسيت كلمة المرور?       </a></p>
+
+<p class="mt-1"><a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline" href="{% url 'password_reset'                        %}" class="btn btn"> Password Reset       - إعادة تعيين كلمة المرور    </a></p>
+
+<p class="mt-1"><a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline" href="{% url 'dashboard-URL'                        %}" class="btn btn"> Go To My Home Page -   العودة إلى الصفحة الرئيسية </a></p> <!-- Go To Home Page -->
+
+                </ul>
+                </nav>
+                {% endif %}
+
+
+

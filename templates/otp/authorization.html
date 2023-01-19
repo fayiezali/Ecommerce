@@ -1,0 +1,86 @@
+{% comment %} {% extends "home/base.html" %}   {% endcomment %}
+{% load static %}
+
+
+
+
+
+
+{% block Page_Title  %}
+
+<div class="row justify-content-center">
+<h1> Authorization -   تفويض الدخول على حسابك </h1>
+<h1>  {{ otp_one_time_password}} <h1> 
+</div>
+
+{% endblock Page_Title %}  
+
+
+
+
+
+
+{% block Contents_Page %} 
+
+<div class="row justify-content-center">
+    <div class="col-5">
+    <div class="card">
+    <div class="card-body">
+    
+<h4> Authorization </h4>
+<h4> تفويض.</h4>
+
+    
+<p> Enter the sent code on the email  </p>
+<p>  ادخل الرمز المرسل على البريد الإلكتروني </p>
+
+
+
+</div>
+</div>
+</div>
+</div>
+
+{% endblock Contents_Page %} 
+
+
+
+
+
+    
+<!-- ظهور رسالة للمستخدم -->
+{% if messages %} <!-- جملة شرطية للتحقق من وجود رسالة قبل عرضها-->
+    {% for message in messages %} <!-- جملة تكرار للمرور على جميع  محتويات الرسالة لعرضها كلها -->
+<!--success: هي التي تقوم بتحديد لون الرسالة اخضر -->
+<!--warning: هي التي تقوم بتحديد لون الرسالة احمر -->
+        <div  class="alert alert-success">
+            {{ message }} <!-- المتغير الذي يحمل نص الرسالة-->
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+
+
+{% block body_block %}
+
+<div class="jumbotron">
+
+{% comment %} <form action="{% url 'login_with_otp-URL' %}" method="POST"> {% endcomment %}
+    <form action="{% url 'login_with_otp-URL' %}" method="POST">
+
+    {% csrf_token %}
+
+    <label for="verificationcode">Verification Code</label>
+    <input type="text" name="txt_one_time_password_current" placeholder="Enter Verification Code">
+
+
+    <button  type="submit" class="btn btn-primary"> Continue - الأستمرار</button>
+
+</form>
+<a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline" href="{% url 'logout_done-URL' %}" class="btn btn"> Cancel    - إلغاء</a> <!-- Go To Home Page -->
+<br>
+<a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline" href="{% url 'resend_otp_-URL'  %}" class="btn btn"> Resend otp    - إعادة إرسال</a> <!-- Go To Home Page -->
+
+</div>
+{% endblock %}

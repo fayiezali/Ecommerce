@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User # إستيراد اسم المستخدم
-from .models import UsersTable
 #for password hashing
 from django.contrib.auth.hashers import make_password, check_password
 #for Regex (regular expression)
-from .models import Profile
 #for email sending
 from django.conf import settings
 import random
