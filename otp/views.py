@@ -53,8 +53,6 @@ def authorization_with_otp_DEF(request): #
                     table_otp.otp_one_time_password = otp
                     # Save the current otp in database
                     table_otp.save()
-                    # messages when account has been created in database
-                    messages.success(request, "Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.")
                     ########################################################################
                     # Send Message To Whatsapp - START
                     user_mobile_number = SendOtpToWhatsappMODEL.objects.get(SOTW_user=user.id)
@@ -67,6 +65,9 @@ def authorization_with_otp_DEF(request): #
                         time.sleep(10) # Seconds of stillness
                         pyautogui.press('enter') # Click on Inter key
                         # Send Message To Whatsapp - END
+                    # messages when Password has been created in database
+                        # messages.success(request,'The One Time Password Has Been Sent To WhatsApp Successfully! Please LogIn.') # send Message to the user
+                        # return redirect('display_authorization-URL')
                     ########################################################################
                         
                     #
@@ -82,8 +83,9 @@ def authorization_with_otp_DEF(request): #
                     # fail_silently is used for the purpose that if teh email is not send, teh app should not crash 
                     send_mail(subject, message, from_email, to_list, fail_silently=True)
                     # Send otp To Email - END
-                    messages.success(request,('User Is Active'))
-                    messages.success(request,('otp_MODEL.save()'))
+                    # messages when Password has been created in database
+                    messages.success(request,'The One Time Password Has Been Sent To Email and WhatsApp Successfully! Please LogIn.') # send Message to the user
+                    messages.success(request,'Important Note: If You do Not Actiate WhatsApp Service You Will Not Receive Messages To Your Mobile.') # send Message to the user
                     return redirect('display_authorization-URL')
                 else:
                     messages.success(request,('User Is Not Active'))
