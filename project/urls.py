@@ -39,5 +39,7 @@ urlpatterns = [
     path('', include('whatsapp.urls')),
     #
     path('', include('forgot_password.urls')),
+    #
+    path('', include('messages_alert.urls')),
     # path("accounts/", include("django.contrib.auth.urls")),  # new
 ]

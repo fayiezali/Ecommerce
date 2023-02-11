@@ -60,7 +60,6 @@ def register_DEF(request):
             messages.error(request, "Username must be under 20 charcters!!")
             return redirect('register-URL')
 
-
         # Verify the validity of the inputs - Email
         if not EMAIL_REGEX.match(email):
             messages.error(request, "EMAIL - The Entered Data Is incorrect")
@@ -88,20 +87,18 @@ def register_DEF(request):
         # # Save the password
         # myuser.password = hash_pswd # Save the Password in the variable
         # myuser.save()        
-################################################################
+################################################################        
         # creating user in database
-        myuser = User.objects.create_user(username, email, password)
-        myuser.first_name = firstname
-        myuser.last_name = lastname 
-        #account of user is not activated
-        myuser.is_active = False
-        # saving in database
-        myuser.save()
+        # create_user() takes from 2 to 4 positional arguments Only
+        myuser = User.objects.create_user(username, password)
+        myuser.email      = email
+        myuser.first_name  = firstname
+        myuser.last_name  = lastname 
+        myuser.is_active   = False #account of user is not activated
+        myuser.save()          # saving in database
 
         # displaying messages when account has been created in database
         messages.success(request, "Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.")
-        
-        print('step(2) - The creation of the new user has been completed')
 
         # Welcome Email
         subject = "Welcome To Ecommerce Login!!"
@@ -112,7 +109,6 @@ def register_DEF(request):
         to_list = [myuser.email]
         # fail_silently is used for the purpose that if teh email is not send, teh app should not crash 
         send_mail(subject, message, from_email, to_list, fail_silently=True)
-        print('step(3) - Welcome Send has been completed')
 
         # email for confiramtion of the account activation
         current_site = get_current_site(request)  # it will traget the diamin of teh current site
@@ -138,10 +134,9 @@ def register_DEF(request):
         )
         email.fail_silently = True
         email.send()
-        print('step(4) - Send email for confiramtion of the account activation  has been completed')
 
         # now redirecting them to signin page
-        return redirect('login-URL')
+        return redirect('login_page-URL')
 
     return render(request, "register/register.html")
 
@@ -162,7 +157,7 @@ def activate(request,uidb64,token):
         myuser.save()
         login(request,myuser)
         messages.success(request, "Your Account has been activated!!")
-        return redirect('login-URL')
+        return redirect('login_page-URL')
     else:
         messages.error(request, "Your Account activation failed!!")
         return redirect('register-URL')

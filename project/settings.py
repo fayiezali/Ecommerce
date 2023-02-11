@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'otp',
     'whatsapp',
     'forgot_password',
+    'messages_alert',
 ]
 
 MIDDLEWARE = [
@@ -155,3 +156,10 @@ EMAIL_PORT = EMAIL_PORT
 EMAIL_USE_TLS = EMAIL_USE_TLS
 PASSWORD_RESET_TIMEOUT_DAYS = PASSWORD_RESET_TIMEOUT_DAYS
 #
+
+
+# Custom Messages Alert
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
