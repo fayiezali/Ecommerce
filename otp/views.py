@@ -40,6 +40,11 @@ def authorization_with_otp_DEF(request): #
         if user:
                 # If the user account is active
                 if user.is_active:
+                    # End the session
+                    if  'rememberme' not in request.POST:
+                        request.session.set_expiry(0)
+                        # request.session.set_expiry(500) #this session will be expire after 5min
+                        print('rememberme not in request.POST - Checkbox" unchecked')
                     # Entry to the system
                     login(request, user)
                     # Definition of variables
@@ -161,6 +166,7 @@ def login_with_otp_DEF(request): #
         # Check the passwords match
         # If  One Time Password Exists In Database
         if otpMODEL.objects.filter(otp_one_time_password=one_time_password_current).exists():
+        
             messages.success(request,('Youre logged in'))
             return redirect('dashboard-URL')
         else:

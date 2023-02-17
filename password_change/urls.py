@@ -8,6 +8,4 @@ from . import views
 #
 urlpatterns = [
         path('changepassword/', views.change_password_DEF, name="changepassword-URL"),
-        # path('changepassword', views.change_password_DEF, name="changepassword_URL"),
-        # path('change-password/<int:id>/',views.change_password_DEF,name='changepassword-URL'),
 ]
