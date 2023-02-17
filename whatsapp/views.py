@@ -2,6 +2,8 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.models import User # إستيراد اسم المستخدم
 from . models import SendOtpToWhatsappMODEL
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 import re
 import datetime
 # Send Whatsapp
@@ -10,6 +12,10 @@ import time
 MOBIL_NUMBER_REGEX  = re.compile(r"[\+\d]?(\d{2,3}[-\.\s]??\d{2,3}[-\.\s]??\d{4}|\(\d{3}\)\s*\d{3}[-\.\s]??\d{4}|\d{3}[-\.\s]??\d{4})")
 #
 #
+# # The Condition For Seeing The Required Page Login
+# @login_required(login_url="login/")
+# View the about Page
+@login_required(login_url='login/')
 # Display Authorization Web Page
 def display_activate_whatsapp_service_DEF(request):
     return render(request,'whatsapp/activate_whatsApp_service.html', {})
