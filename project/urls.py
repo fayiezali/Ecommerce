@@ -40,6 +40,9 @@ urlpatterns = [
     #
     path('', include('forgot_password.urls')),
     #
-    path('', include('messages_alert.urls')),
+    path('', include('messages_alert.urls')),   
+    #
+        # path('', include('product.urls')),    
+
     # path("accounts/", include("django.contrib.auth.urls")),  # new
 ]

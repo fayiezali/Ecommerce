@@ -31,6 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # Theme to change the appearance of the Admin page 
+    # New Look
+    # pip install django-jazzmin
+    'jazzmin', # 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,6 +51,8 @@ INSTALLED_APPS = [
     'whatsapp',
     'forgot_password',
     'messages_alert',
+    'category',
+    'product',
 ]
 
 MIDDLEWARE = [
