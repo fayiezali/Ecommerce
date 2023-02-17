@@ -18,25 +18,3 @@ def logout_confirm_DEF(request):
 def logout_done_DEF(request):
     logout(request)
     return render(request , 'login_logout/logout_done.html', {})
-
-
-
-# def login_DEF(request): # 
-#     if request.method == 'POST':
-#         username = request.POST['username']
-#         password = request.POST['password']
-#         user = authenticate(request, username = username, password = password)
-#         if user:
-#             if user.is_active:
-#                 login(request, user)
-#                 messages.success(request,('Youre logged in'))
-#                 return redirect('dashboard-URL')
-#                 # return render(request, "dashboard/dashboard.html", {'})
-#             else:
-#                 messages.success(request,('ACCOUNT NOT ACTIVE'))
-#                 return redirect('login-URL')
-#         else:
-#             messages.add_message(request, messages.ERROR, u'إسم المستخدم او كلمة المرور غير صحيحة')
-#             return render(request, 'login_logout/login.html', {})
-#     else:
-#         return render(request, 'login_logout/login.html', {})

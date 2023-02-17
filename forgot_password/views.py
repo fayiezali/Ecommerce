@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User # إستيراد اسم المستخدم
-from django.contrib.sites.shortcuts import get_current_site
+# from django.contrib.sites.shortcuts import get_current_site
 from whatsapp.models import  SendOtpToWhatsappMODEL
 from django.conf import settings
 from django.core.mail import send_mail
@@ -72,93 +72,28 @@ def  generate_random_strong_password_DEF(request):
     return render(request , 'forgot_password/generate_random_strong_password.html', context )
 
 
-# Send The New Password To User Email
+# Function - Defined - With Not Return (Statement / Value) - What The Job Is Doing: Send The New Password To User Email
 def FUNCTION_send_new_password_to_user_email(request): # 
-    # Verify that the data is protected
+###(1)Verify that the data is protected #####################################################################
     if request.method == 'POST':
         # Receive user data
-        email_insert_by_user = request.POST['send_new_password_to_user_email']
+        email_insert_by_user = request.POST.get('send_new_password_to_user_email')
+###(2)Verify the validity of the inputs  #####################################################################
         # Verify the validity of the inputs - Email
-        if not EMAIL_REGEX.match(email_insert_by_user):
+        if not EMAIL_REGEX.match(str(email_insert_by_user)):
             messages.error(request, "EMAIL - The Entrance e-mail Is Not Registered With Us")
             return redirect('display_send_new_password_to_user-URL')
-
+        
         # Verify that the Email is not used by another user
         if User.objects.filter(email=email_insert_by_user).exists():
             messages.error(request, "Email - Congratulations, Your Email Has Been Verified In Our Records")
-
+###(3)Search the User & User Is Active & Save Data In Databaser #####################################################################
             # Search the user with the desired e -mail
             user_set = User.objects.filter(email=email_insert_by_user)
             # Get the user's object in all its methods and attributes
             userObj = user_set[0] # Save the user in the variable
-
-            current_user = userObj # Save the user in the variable        
-            # In the event that a user is found
-            if current_user:
-                    # If the user account is active
-                    if current_user.is_active:
-                        # Definition of variables
-                        date_time = ''
-                        password_new=''
-                        # Save Current Date in variable
-                        date_time = str(datetime.datetime.now())
-                        # Function - Calling  - With Return (Statement / Value) -  Generate Random Strong Password 
-                        password_new = generate_random_strong_password_FUNCTION()   
-                        print('The New Password Is:  ' , password_new)
-                        # Save the Password in the variable
-                        hash_pswd = make_password(password_new)
-                        # Put the Password in the Field
-                        current_user.password = hash_pswd 
-                        # save the password in the database
-                        current_user.save() 
-                        #
-                        # Send otp To Email - START
-                        subject = "Welcome To Ecommerce Login!!"
-                        # message = "Hello " + myuser.first_name + "!! \n" + "Welcome to our Space!! \nThank you for visiting our website.\n We have also sent you a confirmation email, please confirm your email address. \n\nThanking You\n$p@r$h\nCEO of nothing"        
-                        # message = "Hello " + user.first_name + "\n" + "One Time Password" + "\n" + "Code:  " +  otp +  "\n" + "Date/Time:  "  + str(datetime.datetime.now()) + "\n\nThanking You\nُemail@name.com\nThe Company's Name"        
-                        message = "Hello " + current_user.first_name + "\n" + "One Time Password" + "\n" + "The New Password is:  " +  password_new +  "\n" + "Date:  "  + date_time + "\n" +"Passing the verification code for others exposes your account to the risk of fraud" + "\n\nThanking You\nُemail@name.com\nThe Company's Name"        
-                        # the email we will be using to send it to teh the new user
-                        from_email = settings.EMAIL_HOST_USER
-                        # the user email
-                        print("CURRENT USER EMAIL: " , current_user.email)
-                        to_list = [current_user.email]
-                        # fail_silently is used for the purpose that if teh email is not send, teh app should not crash 
-                        send_mail(subject, message, from_email, to_list, fail_silently=True)
-                        # Send otp To Email - END
-                        # messages when Password has been created in database
-                        messages.success(request,'The New Password Has Been Sent To Email Successfully! Please LogIn.') # send Message to the user
-                        return redirect('login_page-URL')
-                    else:
-                        messages.success(request,('User Is Not Active'))
-                        return redirect('login_page-URL')
-        else:
-            messages.error(request, "EMAIL - The Entrance e-mail Is Not Registered With Us")
-            return redirect('display_send_new_password_to_user-URL')
-    else:
-        return redirect('login_page-URL')
-#
-#
-# Send The New Password To User Email
-def send_new_password_to_user_email_DEF(request): # 
-    # Verify that the data is protected
-    if request.method == 'POST':
-        # Receive user data
-        email_insert_by_user = request.POST['send_new_password_to_user_email']
-        # Verify the validity of the inputs - Email
-        if not EMAIL_REGEX.match(email_insert_by_user):
-            messages.error(request, "EMAIL - The Entrance e-mail Is Not Registered With Us")
-            return redirect('display_send_new_password_to_user-URL')
-
-        # Verify that the Email is not used by another user
-        if User.objects.filter(email=email_insert_by_user).exists():
-            messages.error(request, "Email - Congratulations, Your Email Has Been Verified In Our Records")
-
-            # Search the user with the desired e -mail
-            user_set = User.objects.filter(email=email_insert_by_user)
-            # Get the user's object in all its methods and attributes
-            userObj = user_set[0] # Save the user in the variable
-
-            current_user = userObj # Save the user in the variable        
+            # Save the user in the variable        
+            current_user = userObj 
             # In the event that a user is found
             if current_user:
                     # If the user account is active
@@ -170,19 +105,16 @@ def send_new_password_to_user_email_DEF(request): #
                         date_time = str(datetime.datetime.now())
                         # Function - Calling  - With Return (Statement / Value) -  Generate Random Strong Password 
                         password_new = FUNCTION_generate_random_strong_password()   
-                        print('The New Password Is:  ' , password_new)
                         # Save the Password in the variable
                         hash_pswd = make_password(password_new)
                         # Put the Password in the Field
                         current_user.password = hash_pswd 
                         # save the password in the database
                         current_user.save() 
-                        #
+###(4)Send OTP To Email #####################################################################
                         # Send otp To Email - START
                         subject = "Welcome To Ecommerce Login!!"
-                        # message = "Hello " + myuser.first_name + "!! \n" + "Welcome to our Space!! \nThank you for visiting our website.\n We have also sent you a confirmation email, please confirm your email address. \n\nThanking You\n$p@r$h\nCEO of nothing"        
-                        # message = "Hello " + user.first_name + "\n" + "One Time Password" + "\n" + "Code:  " +  otp +  "\n" + "Date/Time:  "  + str(datetime.datetime.now()) + "\n\nThanking You\nُemail@name.com\nThe Company's Name"        
-                        message = "Hello " + current_user.first_name + "\n" + "One Time Password" + "\n" + "The New Password is:  " +  password_new +  "\n" + "Date:  "  + date_time + "\n" +"Passing the verification code for others exposes your account to the risk of fraud" + "\n\nThanking You\nُemail@name.com\nThe Company's Name"        
+                        message = "Hello " + current_user.first_name + "\n" + "\n" + "The New Password is:  " +  password_new +  "\n" + "\n" + "Date:  "  + date_time + "\n" +"Passing the verification code for others exposes your account to the risk of fraud" + "\n\nThanking You\nُemail@name.com\nThe Company's Name"        
                         # the email we will be using to send it to teh the new user
                         from_email = settings.EMAIL_HOST_USER
                         # the user email
@@ -191,6 +123,7 @@ def send_new_password_to_user_email_DEF(request): #
                         # fail_silently is used for the purpose that if teh email is not send, teh app should not crash 
                         send_mail(subject, message, from_email, to_list, fail_silently=True)
                         # Send otp To Email - END
+###(5)Send a Message To The User On The Success Or Failure Of The Process #####################################################################
                         # messages when Password has been created in database
                         messages.success(request,'The New Password Has Been Sent To Email Successfully! Please LogIn.') # send Message to the user
                         return redirect('login_page-URL')
@@ -202,25 +135,18 @@ def send_new_password_to_user_email_DEF(request): #
             return redirect('display_send_new_password_to_user-URL')
     else:
         return redirect('login_page-URL')
-#
-#
+###(6)END #####################################################################
 
-# Send The New Password To User WhatsApp
-def send_new_password_to_user_whatsapp_DEF(request): # 
+
+# Function - Defined - With Not Return (Statement / Value) - What The Job Is Doing: Send The New Password To User WhatsApp
+def FUNCTION_send_new_password_to_user_whatsapp(request): # 
+###(1)Verify that the data is protected #####################################################################
     # Verify that the data is protected
     if request.method == 'POST':
         # Receive user data
-        # # Save the current Mobile Number in var
-        # filte_data_mobile_number_from_model  = SendOtpToWhatsappMODEL.objects.filter(SOTW_mobile_number=mobile_number_insert_by_user)
-        # Save the current user
-        # user = request.user
-        # Save the current Mobile Number in var
-        # table_mobile_number = SendOtpToWhatsappMODEL.objects.get(SOTW_user=user.id)
-
-        # Receive user data
         email_insert_by_user                = request.POST.get('email_send_new_password_to_user_mobile')
         mobile_number_insert_by_user        = request.POST.get('mobile_send_new_password_to_user_mobile')
-
+###(2)Verify the validity of the inputs  #####################################################################
         # Verify the validity of the inputs - Email
         if not EMAIL_REGEX.match(str(email_insert_by_user)):
             messages.error(request, "EMAIL - The Entrance e-mail Is Not Registered With Us")
@@ -243,15 +169,9 @@ def send_new_password_to_user_whatsapp_DEF(request): #
         if len(mobile_number_insert_by_user)!=13:
             messages.error(request, "Mobily Number must be Equal 13 Numbers")
             return redirect('display_send_new_password_to_user-URL')
-
-
-        # Search the user with the desired e -mail
-        # user_mobile_number = SendOtpToWhatsappMODEL.objects.get(SOTW_mobile_number=mobile_number_insert_by_user)
-        # user_set = User.objects.filter(username=request.user.username)
-
+###(3)Search the User & User Is Active & Save Data In Databaser #####################################################################
             # Search the user with the desired e -mail
-        user_set = User.objects.filter(email=email_insert_by_user)
-
+        user_set = User.objects.filter(email=email_insert_by_user) 
         userObj = user_set[0] # Save the user in the variable
         current_user = userObj # Save the user in the variable        
         # In the event that a user is found
@@ -273,17 +193,18 @@ def send_new_password_to_user_whatsapp_DEF(request): #
                     current_user.password = hash_pswd 
                     # save the password in the database
                     current_user.save() 
-                    ########################################################################
+###(4)Send OTP To Email #####################################################################
                     # Send Message To Whatsapp - START
                     user_mobile_number = SendOtpToWhatsappMODEL.objects.get(SOTW_mobile_number=mobile_number_insert_by_user)
                     # Verify that the WhatsApp service is active
                     # None:The Field Does Not Have Data - None = False
                     if user_mobile_number.SOTW_mobile_number is not None and user_mobile_number.SOTW_Is_whatsApp_active == True:
-                        message = "\n" + "One Time Password" + "\n" + "       " + "                                 The New Password is: " +  password_new + "       " + "\n" + "                               Date: "  + date_time + "            " +"Passing the verification code for others exposes your account to the risk of fraud"        
+                        message = "\n" + "\n" + "       " + "                                 The New Password is: " +  password_new + "       " +  "\n" + "\n" + "                               Date: "  + date_time + "            " +"Passing the verification code for others exposes your account to the risk of fraud"        
                         # Message='User Account Created - We Thank You and welcome you to join us.'   
                         webbrowser.open('https://web.whatsapp.com/send?phone='+ str(user_mobile_number.SOTW_mobile_number) +'&text='+message)
                         time.sleep(10) # Seconds of stillness
                         pyautogui.press('enter') # Click on Inter key
+###(5)Send a Message To The User On The Success Or Failure Of The Process #####################################################################
                         # messages when Password has been created in database
                         messages.success(request,'The New Password Has Been Sent To WhatsApp Successfully! Please LogIn.') # send Message to the user
                         return redirect('login_page-URL')
@@ -296,5 +217,4 @@ def send_new_password_to_user_whatsapp_DEF(request): #
             return redirect('display_send_new_password_to_user-URL')
     else:
         return redirect('login_page-URL')
-#
-#
+###(6)END #####################################################################
