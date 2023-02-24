@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -129,9 +130,25 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-STATIC_URL = 'static/'
+# https://docs.djangoproject.com/en/4.0/howto/static-files/
+# 
+# To Access "static" Files In Project (All App)
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [ BASE_DIR / "static"]# تحديد مسار الملف وهو الموقع الذي سوف يحبث  في المشروع عن هذا الملف
+# '/media/':  الوسائط المتعددة"Media" بإدارة ملفات الـ "static" يقوم مجلد 
+# '/media/': التي يحتاجها المشروع "Documents ,Images , Audio , Video,"هو مجلد  يتحوي على جميع ملفات 
+# '/media/': يتم إستدعائها عن طريق هذا المجلد . هذاالمجلد فيه جميع إعدادت وتنسيقات الصفحة  "app"في التطبيق  "html"أي صفحة 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = (BASE_DIR /'media')#تحديد مسار الملف وهو الموقع الذي سوف يحبث  في المشروع عن هذا الملف
+#
+# '/media/':  الوسائط المتعددة"Media" بإدارة ملفات الـ "static" يقوم مجلد 
+# '/media/': التي يحتاجها المشروع "Documents ,Images , Audio , Video,"هو مجلد  يتحوي على جميع ملفات 
+# '/media/': يتم إستدعائها عن طريق هذا المجلد . هذاالمجلد فيه جميع إعدادت وتنسيقات الصفحة  "app"في التطبيق  "html"أي صفحة 
+# To Access "media" Files In Project (All App)
+MEDIA_URL = 'media/'
+#
+MEDIA_ROOT = (BASE_DIR /'media')
+#
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
