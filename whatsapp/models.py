@@ -23,8 +23,7 @@ class SendOtpToWhatsappMODEL(models.Model):
     class Meta:
         ordering =  ['SOTW_created_at'] 
     #
-    # class Meta: #'admin'عرض إسم المودل/الجدول في صفحة
-    #     verbose_name_plural = 'otp_MODE'
+        verbose_name_plural = 'Send OTP'
     #
     # create_profile: للمستخدم الجديد "profile"دالة تقوم بإنشاء
     # sender: هي فانكش/دالة تقوم بمتابعة الملف الذي ترتبط به فبمجرد قيام الملف المرتبطة به بحدث ما تقوم بتفيذ الكود الموجود فيها
