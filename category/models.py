@@ -1,43 +1,51 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.safestring import mark_safe
 #
 #
 #
+# Model Category
 class CategoryMODEL(models.Model):
 	
-	c_name         = models.CharField(max_length=200 , db_index=True)
-	c_slug          = models.SlugField(max_length=200 , db_index=True ,unique=True)
-	c_category_image = models.ImageField(upload_to="catgories" ,  db_index=True , blank=True  , null=False ,)
-
+	Cate_name         = models.CharField(max_length=200      , db_index=True   ,                         verbose_name="Name")
+	Cate_slug          = models.SlugField(max_length=200       , db_index=True  , unique=True ,            verbose_name="Slug")
+	Cate_category_image = models.ImageField(upload_to="Catgory_File_Photo/" , db_index=True , blank=False  , null=False , verbose_name="Image Preview"  ,default='Default_Image.png')
+	Cate_available 	    = models.BooleanField(default=True       , db_index=True ,                         verbose_name="Available")
+#
 	class Meta:
 	    # 'Z-A' in descending order
-		ordering = ('c_name',)
+		ordering = ('Cate_name',)
+		verbose_name = "Category"
 		# The Name of the Model That Will Be Displayed In The Admin Page
-		verbose_name      = "Categories"
 		verbose_name_plural = "Categories"
 
     # 'admin'display the field name on a page
 	def __str__(self):
-		return self.c_name
+		return self.Cate_name
 
 	# def get_absolute_url(self):
 	# 	return reverse('shop:product_list_category',args=[self.slug])
-	
-	
-class CategorySubMODEL(models.Model):
-	
-	cs_category      = models.ForeignKey(CategoryMODEL , related_name='categories_sub' , on_delete=models.CASCADE)
-	cs_name         = models.CharField(max_length=200 , db_index=True)
-	cs_slug          = models.SlugField(max_length=200 , db_index=True,unique=True)
-	cs_category_image = models.ImageField(upload_to="catgories_sub" ,  db_index=True , blank=True  , null=False ,)
+#
+#
+#
+# Module Sub Category
+class SubCategoryMODEL(models.Model):
+	SubCat_category       = models.ForeignKey(CategoryMODEL , related_name='categories_sub' , on_delete=models.CASCADE , verbose_name="Category")
+	SubCat_name          = models.CharField(max_length=200 , db_index=True                                        , verbose_name="Name")
+	SubCat_slug           = models.SlugField(max_length=200 , db_index=True,unique=True                             , verbose_name="Slug")
+	SubCat_category_image  = models.ImageField(upload_to="Sub_Catgories_File_Photo/" , db_index=True , blank=False  , null=False , verbose_name="Image Preview"  ,default='Default_Image.png')
+	SubCat_available 	   = models.BooleanField(default=True       , db_index=True                                  , verbose_name="Available")
 
 	class Meta:
 	    # 'Z-A' in descending order
-		ordering = ('cs_name',)
+		ordering = ('SubCat_name',)
+		verbose_name = "Sub Category"
 		# The Name of the Model That Will Be Displayed In The Admin Page
-		verbose_name      = "Categories Sub"
-		verbose_name_plural = "Categories Sub"
+		verbose_name_plural = "Sub Categories"
 
     # 'admin'display the field name on a page
 	def __str__(self):
-		return self.cs_name
+		return self.SubCat_name
+#
+#
+#
