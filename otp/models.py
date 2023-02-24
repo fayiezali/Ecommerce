@@ -13,15 +13,17 @@ class otpMODEL(models.Model):
     otp_one_time_password  = models.IntegerField(db_index=True        , blank=True  , null=True )
     otp_created_at         = models.DateTimeField(auto_now_add=True)
     #
-    def __str__(self):
-        # this will make data labelled using username in table in django admin
-        dataLabel = self.otp_user.username + " __ " + str(self.otp_one_time_password) + " ___ " + str(self.otp_created_at)
-        return dataLabel
+    # def __str__(self):
+    #     # this will make data labelled using username in table in django admin
+    #     dataLabel = self.otp_user.username + " __ " + str(self.otp_one_time_password) + " ___ " + str(self.otp_created_at)
+    #     return dataLabel
     # 
-    # 'Z-A' ترتيب تنازلي
     class Meta:
+    	# 'Z-A' in descending order
         ordering =  ['otp_created_at'] 
-    #
+        # The Name of the Model That Will Be Displayed In The Admin Page
+        verbose_name_plural      = "OTP User Login"
+
     # class Meta: #'admin'عرض إسم المودل/الجدول في صفحة
     #     verbose_name_plural = 'otp_MODE'
     #
