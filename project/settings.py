@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'messages_alert',
     'category',
     'product',
+    'store',
+
 ]
 
 MIDDLEWARE = [

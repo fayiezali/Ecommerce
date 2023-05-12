@@ -44,6 +44,8 @@ urlpatterns = [
     #
     path('', include('messages_alert.urls')),   
     #
+    path('', include('store.urls')),
+
         # path('', include('product.urls')),    
 
     # path("accounts/", include("django.contrib.auth.urls")),  # new
